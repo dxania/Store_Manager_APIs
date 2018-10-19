@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import request, jsonify, request
 
 from Store_Manager_APIs.app import app
 
@@ -29,19 +29,23 @@ def get_product(product_id):
 
 
 @app.route('/api/v1/products', methods =['POST'])
-def create_product():
-    data = request.json()
+def create_product(product_id, product_name, model_no, product_category, unit_price, product_quantity):
+    # product={
+    #         'product_id': self.product_id + 1,
+    #         'product_name':request.json['product_name'],
+    #         'model_no' : request.json['model_no'],
+    #         'product_category':request.json['product_category'],
+    #         'unit_price': request.json['unit_price'],
+    #         'product_quantity': request.json['product_quantity']      
+    #     }
+
     
-    product_id = data['product_id']
-    product_name = data['product_name']
-    model_no = data['model_no']
-    product_category = data['product_category']
-    unit_price = data['unit_price']
-    product_quantity = data['product_quantity']
+    created_product = a_product.create_a_product(product_id, product_name, model_no, product_category, unit_price, product_quantity)
     
-    created_product = a_product.created_a_product(product_name, model_no, product_category, unit_price, product_quantity)
-    
-    if created_product.create_product():
+    if created_product:
         return products.append(request.get_json()), 201
     else:
-        return "nothing added"
+        return jsonify({"Message","Insertion failed"}), 404
+
+    
+    
