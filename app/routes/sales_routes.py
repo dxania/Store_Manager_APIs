@@ -28,15 +28,15 @@ def get_sale(sales_id):
     return jsonify({"Message":"There is no sale record matching that ID"}), 404
 
 
-@app.route('/api/v1/sales', methods =['POST'])
-def create_sale():
+# @app.route('/api/v1/sales', methods =['POST'])
+# def create_sale():
 
-    created_sale = a_sale.create_sale()
+#     created_sale = a_sale.create_sale()
     
-    if created_sale:
-        return sales.append(request.get_json()), 201
-    else:
-        return jsonify({"Message","Insertion failed"}), 404
+#     if created_sale:
+#         return sales.append(request.get_json()), 201
+#     else:
+#         return jsonify({"Message","Insertion failed"}), 404
 
     
     

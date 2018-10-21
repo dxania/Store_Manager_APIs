@@ -22,22 +22,22 @@ class Sales():
         ]
 
 
-    def create_sale(self, sales_id, attendant_name, no_of_pdts, total_profit):
+    # def create_sale(self, sales_id, attendant_name, no_of_pdts, total_profit):
 
-        self.sales_id += self.sales_id
-        self.attendant_name = attendant_name
-        self.no_of_pdts = no_of_pdts
-        self.total_profit
+    #     self.sales_id += self.sales_id
+    #     self.attendant_name = attendant_name
+    #     self.no_of_pdts = no_of_pdts
+    #     self.total_profit
 
-        sale={
-            'sales_id': self.sales_id + 1,
-            'attendant_name':request.json['attendant_name'],
-            'no_of_pdts' : request.json['no_of_pdts'],
-            'total_profit' : request.json['total_profit']
-        }
+    #     sale={
+    #         'sales_id': self.sales_id + 1,
+    #         'attendant_name':request.json['attendant_name'],
+    #         'no_of_pdts' : request.json['no_of_pdts'],
+    #         'total_profit' : request.json['total_profit']
+    #     }
 
-        self.sales.append(sale)
-        return jsonify(self.sales)
+    #     self.sales.append(sale)
+    #     return jsonify(self.sales)
 
     def get_all_sales(self):
         if len(self.sales) > 0:
