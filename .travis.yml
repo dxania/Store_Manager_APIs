@@ -1,0 +1,6 @@
+langauge: python
+
+python:
+  -"3.4.3"
+
+install: true
