@@ -30,18 +30,18 @@ class Tests(unittest.TestCase):
         result = self.app_client.get('/api/v1/products/1')
         self.assertEqual(result.status_code, 200)
 
-    # def test_create_a_product(self):
-    #     response = self.app_client.post("/api/v1/products",
-    #                              content_type='application/json',
-    #                              data=json.dumps({  'product_id' : 9,
-    #                                                 'product_name' : 'Ladies Shoes',
-    #                                                 'model_no': 'LDSH1111',
-    #                                                 'product_category': 'Wardrobes',
-    #                                                 'unit_price': 100000,
-    #                                                 'product_quantity': 260
-    #                                             })
-    #                 )
-    #     self.assertEqual(response.status_code, 201)
+    def test_create_a_product(self):
+        response = self.app_client.post("/api/v1/products",
+                                 content_type='application/json',
+                                 data=json.dumps({  'product_id' : 9,
+                                                    'product_name' : 'Ladies Shoes',
+                                                    'model_no': 'LDSH1111',
+                                                    'product_category': 'Wardrobes',
+                                                    'unit_price': 100000,
+                                                    'product_quantity': 260
+                                                })
+                    )
+        self.assertEqual(response.status_code, 201)
 
 
 if __name__ == ('__main__'):

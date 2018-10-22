@@ -1,8 +1,6 @@
 from flask import Flask, jsonify, request, json
 
 
-# app = Flask(__name__)
-
 products = [
     {
         'product_id' : 1,
@@ -22,7 +20,6 @@ products = [
     }
 ]
 
-# product_id = 0
 
 class Product():
     # def __init__(self):
@@ -49,22 +46,14 @@ class Product():
 
 
     def create_a_product(self, product_id, product_name, model_no, product_category, unit_price, product_quantity):
-        # self.product_id = len(products) + 1
-        # self.product_name = product_name
-        # self.model_no = model_no
-        # self.product_category = product_category
-        # self.unit_price = unit_price
-        # self.product_quantity = product_quantity
-        
         product={
-            'product_id': self.product_id,
-            'product_name':self.product_name,
-            'model_no' : self.model_no,
-            'product_category': self.product_category,
-            'unit_price': self.unit_price,
-            'product_quantity': self.product_quantity      
+            "product_id": len(products) + 1,
+            "product_name" : product_name,
+            "model_no" : model_no,
+            "product_category": product_category,
+            "unit_price": unit_price,
+            "product_quantity": product_quantity      
         }
-
         products.append(product)
         return jsonify(products)
 
