@@ -1,7 +1,7 @@
 # Store_Manager_APIs
 
-[![Build Status](https://travis-ci.org/dxania/Store_Manager_APIs.svg?branch=develop)]
-(https://travis-ci.org/dxania/Store_Manager_APIs) 
+
+[![Build Status](https://travis-ci.com/dxania/Store_Manager_APIs.svg?branch=develop)](https://travis-ci.com/dxania/Store_Manager_APIs)
 [![Coverage Status](https://coveralls.io/repos/github/dxania/Store_Manager_APIs/badge.svg)](https://coveralls.io/github/dxania/Store_Manager_APIs)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/dxania/Store_Manager_APIs)
 
