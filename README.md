@@ -1,6 +1,6 @@
 # Store_Manager_APIs
 
-[![Build Status](https://travis-ci.org/ dxania/Store_Manager_APIs.svg?branch=develop)](https://travis-ci.org/dxania/Store_Manager_APIs) 
+[![Build Status](https://travis-ci.org/dxania/Store_Manager_APIs.svg?branch=develop)](https://travis-ci.org/dxania/Store_Manager_APIs) 
 [![Coverage Status](https://coveralls.io/repos/github/dxania/Store_Manager_APIs/badge.svg?branch=develop)](https://coveralls.io/github/dxania/Store_Manager_APIs?branch=develop)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/dxania/Store_Manager_APIs)
 
@@ -15,9 +15,9 @@ The Program offers the following set of endpoints:
   | EndPoint                   | Functionality                 | Notes                                  |
   | ---------------------------|-------------------------------|----------------------------------------|
   | GET /products              | Fetch all products            | Get all available products.            |
-  | GET /products/<productId>  | Fetch a single product record | Get a specific product using the       |  |                                                               product’s id.                         |
+  | GET /products/[productId]  | Fetch a single product record | Get a specific product using the       |  |                                                               product’s id.                         |
   |  GET /sales                | Fetch all sale records        | Get all sale records.                  |
-  |  GET /sales/<saleId>       | Fetch a single sale record    | Get a specific sale record using its id|
+  |  GET /sales/[saleId]       | Fetch a single sale record    | Get a specific sale record using its id|
   |  POST /sales               | Create a sale order           | Create a sale record.                  |
   |  POST /products            | Create a product              | Create a product.                      |
 
@@ -45,7 +45,6 @@ Flask to build the application
 ```
 Virtualenv to create a virtual environment
     version: 16.0.0
-    $ pip install click
 ```
 ```
 Pytest to perform tests
@@ -73,13 +72,13 @@ After cloning, you will have a folder named `Store_Manager_APIs`
 ``` source <name of virtualenvironment>/bin/activate```
 You should the name of the virtual environment placed right nefore your current path/directory in brackets()
 4. Run the application
-```export FLASK_APP=store_mgr.py```
+```export FLASK_APP=store_mgr.py``` then
 ```flask run```
 5. Follow the instructions
 
 ## Testing
 1. Run `pytest` in the directory of the project to run unit tests
-2. Test with [Postman](https://www.getpostman.com/) by pasting the url [http://127.0.0.1:5000/api/v1/products](http://127.0.0.1:5000/api/v1/products) for Products or [http://127.0.0.1:5000/api/v1/sales](http://127.0.0.1:5000/api/v1/sales) for Sales into the url section and call the GET/POST methods accordingly.
+2. Test with [Postman](https://www.getpostman.com/) by pasting the url [http://127.0.0.1:5000/api/v1/products](http://127.0.0.1:5000/api/v1/products) for Products or [http://127.0.0.1:5000/api/v1/sales](http://127.0.0.1:5000/api/v1/sales) for Sales into the url section and call the GET/POST methods accordingly. (For the POST requests, enter the data as raw application/json)
 
 ## Author
-[Daizy Obura]()
+[Daizy Obura](https://github.com/dxania/)
