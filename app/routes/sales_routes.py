@@ -1,16 +1,18 @@
-from flask import request, jsonify, request
+from flask import request, jsonify, Response
 
 from Store_Manager_APIs.app import app
 
 from Store_Manager_APIs.app.models.sales_models import *
 
+from ..models.sales_models import Sales
+
 #instance of the Sales class
 a_sale = Sales()
 
 #endpoint for the index page
-@app.route('/')
-def index():
-    return "hey"
+# @app.route('/')
+# def index():
+#     return "hey"
 
 #GET /sales endpoint 
 @app.route('/api/v1/sales', methods = ['GET'])

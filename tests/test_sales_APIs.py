@@ -4,9 +4,9 @@ import unittest
 
 from Store_Manager_APIs.app import app
 
-from Store_Manager_APIs.app.models.sales_models import *
+# from Store_Manager_APIs.app.models.sales_models import *
 
-from Store_Manager_APIs.app.routes.sales_routes import *
+from Store_Manager_APIs.app.routes import sales_routes
 
 
 
