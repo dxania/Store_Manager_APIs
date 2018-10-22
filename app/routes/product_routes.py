@@ -46,6 +46,3 @@ def create_product(product_id, product_name, model_no, product_category, unit_pr
         return products.append(request.get_json()), 201
     else:
         return jsonify({"Message","Insertion failed"}), 404
-
-    
-    
