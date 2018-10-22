@@ -30,58 +30,43 @@ def get_product(product_id):
     return jsonify({"Message":"There is no product matching that ID"}), 404
 
 
-# @app.route('/api/v1/products', methods =['POST'])
-# def create_product():
+@app.route('/api/v1/products', methods =['POST'])
+def create_product():
+
+    input_d = request.get_json(force=True)
+
+    pdt_name = input_d.get("product_name")
+    if not pdt_name or pdt_name.isspace():
+        return jsonify({"Message":"Product Name is required"}), 400
+
+    pdt_model = input_d.get("model_no")
+    if not pdt_model or pdt_model.isspace():
+        return jsonify({"Message":"Product Model is required"}), 400
+
+    pdt_category = input_d.get("product_category")
+    if not pdt_category or pdt_category.isspace():
+        return jsonify({"Message":"Product Category is required"}), 400
     
-#     input_d = request.get_json(force=True)
+    pdt_price = input_d.get("unit_price")
+    if not pdt_price :
+        return jsonify({"Message":"Product Price is required"}), 400
+
+    pdt_quantity = input_d.get("product_quantity")
+    if not pdt_quantity:
+        return jsonify({"Message":"Product Quantity is required"}), 400
+
+
+    product={
+            "product_id": len(products) + 1,
+            "product_name" : pdt_name,
+            "model_no" : pdt_model,
+            "product_category": pdt_category,
+            "unit_price": pdt_price,
+            "product_quantity": pdt_quantity      
+    }
     
-#     product={
-#             'product_id': len(products) + 1,
-#             'product_name' : input_d.get("product_name")
-#             'model_no' : input_d.get('model_no'),
-#             'product_category': input_d.get('product_category'),
-#             'unit_price': input_d.get('unit_price'),
-#             'product_quantity': input_d.get('product_quantity')      
-#     }
-
-#     if products.append(product):
-#         return jsonify({"Added Product": product,"Message":"Product added successfully"}), 201, {'Content-Type': 'application/json'}
-#     else:
-#         return jsonify({"Message":"Insertion failed"}), 404
-  
-    
-
-
-
-
-
-
-
-    # data_q = request.json
-
-    # created_product = [Product.create_a_product(data_q['product_id'], data_q['product_name'], 
-    #                                              data_q['model_no'], data_q('product_category'), 
-    #                                              data_q['unit_price'], data_q['product_quantity'])
-
-
-
-    # product_id = data_q['product_id']
-    # product_name =data_q['product_name']
-    # model_no = data_q['model_no']
-    # product_category = data_q['product_category']
-    # unit_price = data_q['unit_price']
-    # product_quantity = data_q['product_quantity']
-        #  product={
-        #     'product_id': product_id,
-        #     'product_name':product_name,
-        #     'model_no' : model_no,
-        #     'product_category': product_category,
-        #     'unit_price': unit_price,
-        #     'product_quantity': product_quantity      
-        # }
-    
-    # if created_product:
-
-
-    
-    
+    products.append(product)
+    if products:
+        return jsonify({"Added Product": product,"Message":"Product added successfully"}), 201
+    else:
+        return jsonify({"Message":"Insertion failed"}), 404
