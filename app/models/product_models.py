@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, json
+from flask import jsonify
 
 
 
@@ -56,4 +56,5 @@ class Product():
             if product['product_id'] == product_id:
                 # return product
                 return "The product"
+                
 
