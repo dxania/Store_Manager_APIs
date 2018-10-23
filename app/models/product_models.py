@@ -48,10 +48,12 @@ class Product():
 
     def get_all_products(self):
         if len(self.products) > 0:
-            return self.products
+            # return self.products
+            return "The products"
 
     def get_a_product(self, product_id):
         for product in self.products:
             if product['product_id'] == product_id:
-                return product
+                # return product
+                return "The product"
 

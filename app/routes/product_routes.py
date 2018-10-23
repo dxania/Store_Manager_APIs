@@ -1,32 +1,38 @@
-from flask import flash, request, jsonify
-
+from flask import flash, request
+from flask import jsonify, make_response
 import json
 
 from app import app
 
 from app.models.product_models import *
 
-from ..models.product_models import Product
 
+product_object = Product()
 
-a_product = Product()
-app.secret_key = 'some_secret'
 
 @app.route('/')
 def index():
+    """The first page and endpoint that 
+    is rendered on loading the url
+    """
     return """
     Products ==>
-    <a href="https://store-manager-apis.herokuapp.com/api/v1/products">Navigate to this link to interact with the products endpoint</a><br><br>
+    <a href="https://store-manager-apis.herokuapp.com/api/v1/products">
+    Navigate to this link to interact with the products endpoint</a><br><br>
     Sales ==>
-    <a href="https://store-manager-apis.herokuapp.com/api/v1/sales">Navigate to this link to interact with the sales endpoint</a>
+    <a href="https://store-manager-apis.herokuapp.com/api/v1/sales">
+    Navigate to this link to interact with the sales endpoint</a>
     """
 
 
 @app.route('/api/v1/products', methods = ['GET'])
 def get_products():
-    all_products = a_product.get_all_products()
+    """The retrieve all products function 
+    wrapped around the Get /products endpoint
+    """
+    all_products = product_object.get_all_products()
     if all_products:
-        return jsonify({"Products": all_products}), 200
+        return jsonify(all_products), 200
     else:
         return jsonify({
             "Message":"There are no products in the store"
@@ -35,9 +41,13 @@ def get_products():
 
 @app.route('/api/v1/products/<int:product_id>', methods = ['GET'])
 def get_product(product_id):
-    a_single_product = a_product.get_a_product(product_id)
+    """The retrieve a particular product 
+    function wrapped around the Get 
+    /product/<int:product_id> endpoint
+    """
+    a_single_product = product_object.get_a_product(product_id)
     if a_single_product:
-        return jsonify({"Product":a_single_product}), 200
+        return a_single_product, 200
     return jsonify({
         "Message":"There is no product matching that ID"
     }), 404
@@ -45,7 +55,9 @@ def get_product(product_id):
 
 @app.route('/api/v1/products', methods =['POST'])
 def create_product():
-
+    """The create a product function 
+    wrapped around the Post /products endpoint
+    """
     input_d = request.get_json(force=True)
 
     pdt_name = input_d.get("product_name")
@@ -78,11 +90,15 @@ def create_product():
             "Message":"Product Quantity is required"
         }), 400
 
-    product_id = len(a_product.products) + 1
+    product_id = len(product_object.products) + 1
 
-    product = a_product.create_a_product(product_id,pdt_name,pdt_model,pdt_category,pdt_price,pdt_quantity)
-    a_product.products.append(product)
-    if a_product.products:
+    product = product_object.create_a_product(  product_id,
+                                                pdt_name,pdt_model,
+                                                pdt_category,pdt_price,
+                                                pdt_quantity)
+
+    product_object.products.append(product)
+    if product_object.products:
         return product, 201
     else:
         return jsonify({
