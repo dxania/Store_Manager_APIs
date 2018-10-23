@@ -5,7 +5,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/dxania/Store_Manager_APIs/badge.svg)](https://coveralls.io/github/dxania/Store_Manager_APIs)
 [![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/dxania/Store_Manager_APIs)
 
-[![Coverage Status](https://coveralls.io/repos/github/dxania/Store_Manager_APIs/badge.svg)](https://coveralls.io/github/dxania/Store_Manager_APIs)
 
 Set of API endpoints to be consumed by a store manager application
 
@@ -33,7 +32,7 @@ What things you will need to run the application
 
 ```
 Python3
-    version: 3.4.3
+    version: 3.4 or 3.6
 ```
 ```
 Pip for python3
@@ -50,7 +49,7 @@ Virtualenv to create a virtual environment
 ```
 ```
 Pytest to perform tests
-    version: 2.5.1
+    version: 3.9.1
     $ pip install pytest -U
 ```
 Alternatively, run `pip install -r requirements.txt` to install all the necessary tools
@@ -79,8 +78,12 @@ You should the name of the virtual environment placed right nefore your current 
 5. Follow the instructions
 
 ## Testing
-1. Run `pytest` in the directory of the project to run unit tests
+1. Run `pytest` or `pytest tests/<test_file_name>` in the directory of the project to run unit tests
 2. Test with [Postman](https://www.getpostman.com/) by pasting the url [http://127.0.0.1:5000/api/v1/products](http://127.0.0.1:5000/api/v1/products) for Products or [http://127.0.0.1:5000/api/v1/sales](http://127.0.0.1:5000/api/v1/sales) for Sales into the url section and call the GET/POST methods accordingly. (For the POST requests, enter the data as raw application/json)
+
+## Deployment
+Deployed on heroku.
+Visit the this [link](https://store-manager-apis.herokuapp.com) to interact with the deployed app
 
 ## Author
 [Daizy Obura](https://github.com/dxania/)
