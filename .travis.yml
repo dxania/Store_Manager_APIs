@@ -1,13 +1,12 @@
 langauge: python
 
 python:
-  - "3.4.3"
-  - "3.6.7"
-  - "2.7.6"
+  - "3.4"
+  - "3.6"
 
 sudo: enabled
 
-before_script:
+install:
   - "pip install -r requirements.txt"
 
 script:
