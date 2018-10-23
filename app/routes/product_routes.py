@@ -11,7 +11,7 @@ a_product = Product()
 
 @app.route('/')
 def index():
-    return "hey"
+    return '<a href="https://store-manager-apis.herokuapp.com/api/v1/products">Navigate to this link to interact with the products endpoint</a>'
 
 
 @app.route('/api/v1/products', methods = ['GET'])
