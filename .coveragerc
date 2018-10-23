@@ -1,0 +1,10 @@
+[report]
+
+omit = 
+    */python?.?/*
+    */site-packages/*
+    */home/travis/virtualenv/*
+    *__init__*
+    */dist-packages/*
+    tests/*
+    app/exception_handler.py
