@@ -1,4 +1,10 @@
-__pycache__/
+Store_Manager_APIs/__pycache__/
+Store_Manager_APIs/.pytest_cache/
 venv/
-.pytest_cache
-venv/*
+*.pyc
+.vscode/
+app/*.pyc
+app/models/*.pyc
+app/models/__pycache__/*.pyc
+tests/__pycache__/*.pyc
+tests/*.pyc
