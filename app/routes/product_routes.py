@@ -1,4 +1,6 @@
-from flask import request, jsonify, Response
+from flask import flash, request, jsonify
+
+import json
 
 from app import app
 
@@ -8,6 +10,7 @@ from ..models.product_models import Product
 
 
 a_product = Product()
+app.secret_key = 'some_secret'
 
 @app.route('/')
 def index():
@@ -24,15 +27,20 @@ def get_products():
     all_products = a_product.get_all_products()
     if all_products:
         return jsonify({"Products": all_products}), 200
-    return jsonify({"Message":"There are no products in the store"}), 204
-
+    else:
+        return jsonify({
+            "Message":"There are no products in the store"
+        }), 404
+    
 
 @app.route('/api/v1/products/<int:product_id>', methods = ['GET'])
 def get_product(product_id):
     a_single_product = a_product.get_a_product(product_id)
-    if a_product:
+    if a_single_product:
         return jsonify({"Product":a_single_product}), 200
-    return jsonify({"Message":"There is no product matching that ID"}), 404
+    return jsonify({
+        "Message":"There is no product matching that ID"
+    }), 404
 
 
 @app.route('/api/v1/products', methods =['POST'])
@@ -42,36 +50,41 @@ def create_product():
 
     pdt_name = input_d.get("product_name")
     if not pdt_name or pdt_name.isspace():
-        return jsonify({"Message":"Product Name is required"}), 400
+        return jsonify({
+            "Message":"Product Name is required"
+        }), 400
 
     pdt_model = input_d.get("model_no")
     if not pdt_model or pdt_model.isspace():
-        return jsonify({"Message":"Product Model is required"}), 400
+        return jsonify({
+            "Message":"Product Model is required"
+        }), 400
 
     pdt_category = input_d.get("product_category")
     if not pdt_category or pdt_category.isspace():
-        return jsonify({"Message":"Product Category is required"}), 400
+        return jsonify({
+            "Message":"Product Category is required"
+        }), 400
     
     pdt_price = input_d.get("unit_price")
     if not pdt_price :
-        return jsonify({"Message":"Product Price is required"}), 400
+        return jsonify({
+            "Message":"Product Price is required"
+        }), 400
 
     pdt_quantity = input_d.get("product_quantity")
     if not pdt_quantity:
-        return jsonify({"Message":"Product Quantity is required"}), 400
+        return jsonify({
+            "Message":"Product Quantity is required"
+        }), 400
 
+    product_id = len(a_product.products) + 1
 
-    product={
-            "product_id": len(products) + 1,
-            "product_name" : pdt_name,
-            "model_no" : pdt_model,
-            "product_category": pdt_category,
-            "unit_price": pdt_price,
-            "product_quantity": pdt_quantity      
-    }
-    
-    products.append(product)
-    if products:
-        return jsonify({"Added Product": product,"Message":"Product added successfully"}), 201
+    product = a_product.create_a_product(product_id,pdt_name,pdt_model,pdt_category,pdt_price,pdt_quantity)
+    a_product.products.append(product)
+    if a_product.products:
+        return product, 201
     else:
-        return jsonify({"Message":"Insertion failed"}), 404
+        return jsonify({
+            "Message":"Insertion failed"
+        }), 400
