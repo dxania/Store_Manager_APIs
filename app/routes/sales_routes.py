@@ -1,8 +1,8 @@
 from flask import request, jsonify, Response
 
-from Store_Manager_APIs.app import app
+from app import app
 
-from Store_Manager_APIs.app.models.sales_models import *
+from app.models.sales_models import *
 
 from ..models.sales_models import Sales
 

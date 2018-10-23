@@ -2,11 +2,11 @@ import json
 
 import unittest
 
-from Store_Manager_APIs.app import app
+from app import app
 
-from Store_Manager_APIs.app.models.product_models import *
+from app.models.product_models import *
 
-from Store_Manager_APIs.app.routes.product_routes import *
+from app.routes.product_routes import *
 
 
 
