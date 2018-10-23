@@ -34,8 +34,8 @@ def get_products():
     if all_products:
         return jsonify(all_products), 200
     else:
-        return jsonify({
-            "Message":"There are no products in the store"
+        return jsonify(
+            {"Message":"There are no products in the store"
         }), 404
     
 
