@@ -1,8 +1,10 @@
 from flask import jsonify
 
 
-
 class Product():
+    """Products class defining 
+    the product models
+    """
     def __init__(self):
 
         self.products = []
@@ -43,18 +45,25 @@ class Product():
             "unit_price": unit_price,
             "product_quantity": product_quantity      
         }
+
         self.products.append(product)
         return jsonify(self.products)
 
     def get_all_products(self):
+        """Model to get and 
+        return all products
+        """
         if len(self.products) > 0:
             # return self.products
             return "The products"
 
     def get_a_product(self, product_id):
+        """Model to get and return 
+        a particular product
+        """
         for product in self.products:
             if product['product_id'] == product_id:
                 # return product
                 return "The product"
-                
+
 

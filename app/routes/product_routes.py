@@ -1,4 +1,3 @@
-
 from flask import jsonify, flash, request
 
 from app.exception_handler import InvalidUsage
@@ -7,11 +6,13 @@ from app import app
 
 from app.models.product_models import Product
 
-
+#instance of Products Class
 product_object = Product()
+
 
 @app.errorhandler(InvalidUsage)
 def handle_invalid_usage(error):
+    """Error handling and exception raising"""
     response = jsonify(error.to_dict())
     response.status_code = error.status_code
     return response
@@ -32,7 +33,7 @@ def index():
 
 @app.route('/api/v1/products', methods = ['GET'])
 def get_products():
-    """The retrieve all products function 
+    """Retrieve all products function 
     wrapped around the Get /products endpoint
     """
     all_products = product_object.get_all_products()
@@ -43,7 +44,7 @@ def get_products():
 
 @app.route('/api/v1/products/<int:product_id>', methods = ['GET'])
 def get_product(product_id):
-    """The retrieve a particular product 
+    """Retrieve a particular product 
     function wrapped around the Get 
     /product/<int:product_id> endpoint
     """
@@ -55,38 +56,44 @@ def get_product(product_id):
 
 @app.route('/api/v1/products', methods =['POST'])
 def create_product():
-    """The create a product function 
-    wrapped around the Post /products endpoint
+    """Create a product function 
+    wrapped around the Post /products 
+    endpoint
     """
-    input_d = request.get_json(force=True)
+    #store the request data in user_input variable
+    user_input = request.get_json(force=True)
 
-    pdt_name = input_d.get("product_name")
+    #validate user input
+    pdt_name = user_input.get("product_name")
     if not pdt_name or pdt_name.isspace():
         raise InvalidUsage('Product Name is required', status_code=400)
 
-    pdt_model = input_d.get("model_no")
+    pdt_model = user_input.get("model_no")
     if not pdt_model or pdt_model.isspace():
         raise InvalidUsage('Product Quantity is required', status_code=400)
 
-    pdt_category = input_d.get("product_category")
+    pdt_category = user_input.get("product_category")
     if not pdt_category or pdt_category.isspace():
         raise InvalidUsage('Product Category is required', status_code=400)
     
-    pdt_price = input_d.get("unit_price")
+    pdt_price = user_input.get("unit_price")
     if not pdt_price :
         raise InvalidUsage('Product Price is required', status_code=400)
 
-    pdt_quantity = input_d.get("product_quantity")
+    pdt_quantity = user_input.get("product_quantity")
     if not pdt_quantity:
         raise InvalidUsage('Product Quantity is required', status_code=400)
 
+    #auto generate the product ID
     product_id = len(product_object.products) + 1
-
+        
+    #use the Products object to invoke the create_a_product function
     product = product_object.create_a_product(  product_id,
                                                 pdt_name,pdt_model,
                                                 pdt_category,pdt_price,
                                                 pdt_quantity)
 
+    #add the new product to the list of products
     product_object.products.append(product)
     if product_object.products:
         return product, 201
