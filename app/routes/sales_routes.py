@@ -26,7 +26,7 @@ def get_sales():
     #use Sales instance to call get_all_sales function
     all_sales = sales_object.get_all_sales()
     if all_sales:
-        return jsonify({"Products": all_sales}), 200
+        return jsonify({"Sale records": all_sales}), 200
     else:
         raise InvalidUsage('No sales have been added yet', status_code=404)
 
@@ -39,8 +39,8 @@ def get_sale(sales_id):
     """
     #use Sales instance to call get_sale function
     a_single_sale = sales_object.get_sale(sales_id)
-    if sales_object:
-        return jsonify({"Product":a_single_sale}), 200
+    if a_single_sale:
+        return jsonify({"Sale record":a_single_sale}), 200
     else:
         raise InvalidUsage('There is no sale record matching that ID', status_code=404)
 

@@ -1,4 +1,4 @@
-from flask import jsonify, flash, request
+from flask import jsonify, flash, request, make_response
 
 from app.exception_handler import InvalidUsage
 
@@ -38,8 +38,9 @@ def get_products():
     """
     all_products = product_object.get_all_products()
     if all_products:
-        return jsonify(all_products), 200
-    raise InvalidUsage('There are no products in the store', status_code=204) 
+        return all_products, 200
+    else:
+        raise InvalidUsage('There are no products in the store', status_code=204) 
     
 
 @app.route('/api/v1/products/<int:product_id>', methods = ['GET'])
@@ -50,7 +51,7 @@ def get_product(product_id):
     """
     a_single_product = product_object.get_a_product(product_id)
     if a_single_product:
-        return a_single_product, 200
+        return jsonify({"Product":a_single_product}), 200
     else:
         raise InvalidUsage('There is no product matching that ID', status_code=404)
 

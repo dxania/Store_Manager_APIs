@@ -1,3 +1,5 @@
+import json
+
 from flask import jsonify
 
 
@@ -7,26 +9,26 @@ class Product():
     """
     def __init__(self):
 
-        self.products = []
+        # self.products = []
 
-        # self.products = [
-        #     {
-        #         'product_id' : 1,
-        #         'product_name' : 'Ladies Bag',
-        #         'model_no': 'LDBG1111',
-        #         'product_category': 'Wardrobes',
-        #         'unit_price': 45000,
-        #         'product_quantity': 200
-        #     },
-        #     {
-        #         'product_id' : 2,
-        #         'product_name' : 'Chocolate',
-        #         'model_no': 'FCH121',
-        #         'product_category': 'Snacks',
-        #         'unit_price': 7500,
-        #         'product_quantity': 500 
-        #     }
-        # ]
+        self.products = [
+            {
+                'product_id' : 1,
+                'product_name' : 'Ladies Bag',
+                'model_no': 'LDBG1111',
+                'product_category': 'Wardrobes',
+                'unit_price': 45000,
+                'product_quantity': 200
+            },
+            {
+                'product_id' : 2,
+                'product_name' : 'Chocolate',
+                'model_no': 'FCH121',
+                'product_category': 'Snacks',
+                'unit_price': 7500,
+                'product_quantity': 500 
+            }
+        ]
 
 
     def create_a_product(self, product_id, product_name, model_no, product_category, unit_price, product_quantity):
@@ -47,15 +49,16 @@ class Product():
         }
 
         self.products.append(product)
-        return jsonify(self.products)
+        return jsonify(product)
 
     def get_all_products(self):
         """Model to get and 
         return all products
         """
         if len(self.products) > 0:
+            return jsonify({"Products": self.products})
             # return self.products
-            return "The products"
+
 
     def get_a_product(self, product_id):
         """Model to get and return 
@@ -63,7 +66,7 @@ class Product():
         """
         for product in self.products:
             if product['product_id'] == product_id:
-                # return product
-                return "The product"
+                return product
+                # return "The product"
 
 
