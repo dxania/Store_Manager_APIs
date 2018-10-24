@@ -8,3 +8,9 @@ omit =
     */dist-packages/*
     tests/*
     app/exception_handler.py
+
+exclude_lines =
+    pragma: no cover
+    def handle_invalid_usage
+    raise InvalidUsage
+
