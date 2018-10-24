@@ -12,5 +12,6 @@ omit =
 exclude_lines =
     pragma: no cover
     def handle_invalid_usage
+    def index
     raise InvalidUsage
 

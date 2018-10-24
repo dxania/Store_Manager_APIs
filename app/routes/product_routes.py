@@ -21,8 +21,7 @@ def index():
     """The first page and endpoint that 
     is rendered on loading the url
     """
-    return """
-    Products ==>
+    return """Products ==>
     <a href="https://store-manager-apis.herokuapp.com/api/v1/products">
     Navigate to this link to interact with the products endpoint</a><br><br>
     Sales ==>
