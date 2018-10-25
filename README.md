@@ -32,7 +32,7 @@ What things you will need to run the application
 
 ```
 Python3
-    version: 3.4 or 3.6
+    version: 3.6
 ```
 ```
 Pip for python3
@@ -71,7 +71,7 @@ After cloning, you will have a folder named `Store_Manager_APIs`
 ``` python3 -m venv <name of virtualenvironment> ```
 3. Activate the virtual environment
 ``` source <name of virtualenvironment>/bin/activate```
-You should the name of the virtual environment placed right nefore your current path/directory in brackets()
+You should see the name of the virtual environment placed right before your current path/directory in brackets()
 4. Run the application
 ```export FLASK_APP=store_mgr.py``` then
 ```flask run```
