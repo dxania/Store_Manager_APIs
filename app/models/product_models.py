@@ -56,7 +56,7 @@ class Product():
         return all products
         """
         if len(self.products) > 0:
-            return self.products
+            return jsonify({"pdts":self.products})
         else:
             return False
 
@@ -65,9 +65,11 @@ class Product():
         """Model to get and return 
         a particular product
         """
-        for product in self.products:
-            if product['product_id'] == product_id:
-                return product
-                # return "The product"
+        if len(self.products) > 0:
+            for product in self.products:
+                if product.get('product_id') == product_id:
+                    return product
+                else:
+                    return False
 
 

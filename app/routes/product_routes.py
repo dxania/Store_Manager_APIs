@@ -31,7 +31,7 @@ def index():
     """
 
 
-@app.route('/api/v1/products', methods = ['GET'])
+@app.route("/api/v1/products", methods = ['GET'])
 def get_products():
     """Retrieve all products function 
     wrapped around the Get /products endpoint
@@ -66,24 +66,24 @@ def create_product():
 
     #validate user input
     pdt_name = user_input.get("product_name")
-    if not pdt_name or pdt_name.isspace():
-        raise InvalidUsage('Product Name is required', status_code=400)
+    if not pdt_name or pdt_name.isspace() or not isinstance(pdt_name, str):
+        raise InvalidUsage('Product Name is required and should be letters', status_code=400)
 
     pdt_model = user_input.get("model_no")
     if not pdt_model or pdt_model.isspace():
-        raise InvalidUsage('Product Quantity is required', status_code=400)
+        raise InvalidUsage('Product Model is required', status_code=400)
 
     pdt_category = user_input.get("product_category")
     if not pdt_category or pdt_category.isspace():
         raise InvalidUsage('Product Category is required', status_code=400)
     
     pdt_price = user_input.get("unit_price")
-    if not pdt_price :
-        raise InvalidUsage('Product Price is required', status_code=400)
+    if not pdt_price or not isinstance(pdt_price, int) :
+        raise InvalidUsage('Product Price is required and must be an integer', status_code=400)
 
     pdt_quantity = user_input.get("product_quantity")
-    if not pdt_quantity:
-        raise InvalidUsage('Product Quantity is required', status_code=400)
+    if not pdt_quantity or not isinstance(pdt_quantity, int):
+        raise InvalidUsage('Product Quantity is required and must be an integer', status_code=400)
 
     #auto generate the product ID
     product_id = len(product_object.products) + 1
