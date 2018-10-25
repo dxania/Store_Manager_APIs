@@ -56,8 +56,9 @@ class Product():
         return all products
         """
         if len(self.products) > 0:
-            return jsonify({"Products": self.products})
-            # return self.products
+            return self.products
+        else:
+            return False
 
 
     def get_a_product(self, product_id):

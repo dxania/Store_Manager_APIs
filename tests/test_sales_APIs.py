@@ -25,9 +25,9 @@ class Tests(unittest.TestCase):
         self.app_client = app.test_client()
 
     #test Get /sales endpoint
-    def test_get_all_sales(self):
-        response = self.app_client.get("/api/v1/sales")
-        self.assertEqual(response.status_code, 200)
+    # def test_get_all_sales(self):
+    #     response = self.app_client.get("/api/v1/sales")
+    #     self.assertEqual(response.status_code, 200)
     
     #test Get /sales/<int:sales_id> endpoint
     def test_get_sale(self):

@@ -47,7 +47,7 @@ class Sales():
         all sales records
         """
         if len(self.sales) > 0:
-            return self.sales
+            return jsonify({"Sale records": self.sales})
 
     
     def get_sale(self, sales_id):

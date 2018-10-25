@@ -26,7 +26,8 @@ def get_sales():
     #use Sales instance to call get_all_sales function
     all_sales = sales_object.get_all_sales()
     if all_sales:
-        return jsonify({"Sale records": all_sales}), 200
+        return all_sales
+
     else:
         raise InvalidUsage('No sales have been added yet', status_code=404)
 

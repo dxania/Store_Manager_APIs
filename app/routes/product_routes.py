@@ -38,7 +38,7 @@ def get_products():
     """
     all_products = product_object.get_all_products()
     if all_products:
-        return all_products, 200
+        return jsonify({"Products":all_products, "message":"All products"})
     else:
         raise InvalidUsage('There are no products in the store', status_code=204) 
     
