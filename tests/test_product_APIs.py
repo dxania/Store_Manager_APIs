@@ -36,11 +36,11 @@ class Tests(unittest.TestCase):
         # self.assertEqual(get_request.status_code, 200)
 
     
-    # def test_get_all_products(self):
-    #     self.app_client.get("/api/v1/products")
-    #     reply = json.loads(get_request.data)
-    #     self.assertEqual(reply["message"], "All products")
-        # self.assertEqual(get_request.status_code, 200)
+    def test_get_all_products(self):
+        get_request = self.app_client.get("/api/v1/products")
+        response = json.loads(get_request.data)
+        self.assertEqual(response["message"], "All products")
+        self.assertEqual(get_request.status_code, 200)
 
 
 

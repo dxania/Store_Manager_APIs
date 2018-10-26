@@ -56,7 +56,8 @@ class Product():
         return all products
         """
         if len(self.products) > 0:
-            return jsonify({"pdts":self.products})
+            for product in range(len(self.products)):
+                return self.products[product]
         else:
             return False
 
