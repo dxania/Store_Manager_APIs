@@ -1,76 +1,67 @@
 import json
-
 from flask import jsonify
 
+products = []
+            # {
+            #     'product_id' : 1,
+            #     'product_name' : 'Ladies Bag',
+            #     'model_no': 'LDBG1111',
+            #     'product_category': 'Wardrobes',
+            #     'unit_price': 45000,
+            #     'product_quantity': 200
+            # },
+            # {
+            #     'product_id' : 2,
+            #     'product_name' : 'Chocolate',
+            #     'model_no': 'FCH121',
+            #     'product_category': 'Snacks',
+            #     'unit_price': 7500,
+            #     'product_quantity': 500 
+            # }
 
 class Product():
     """Products class defining 
     the product models
     """
-    def __init__(self):
-
-        # self.products = []
-
-        self.products = [
-            {
-                'product_id' : 1,
-                'product_name' : 'Ladies Bag',
-                'model_no': 'LDBG1111',
-                'product_category': 'Wardrobes',
-                'unit_price': 45000,
-                'product_quantity': 200
-            },
-            {
-                'product_id' : 2,
-                'product_name' : 'Chocolate',
-                'model_no': 'FCH121',
-                'product_category': 'Snacks',
-                'unit_price': 7500,
-                'product_quantity': 500 
-            }
-        ]
-
-
-    def create_a_product(self, product_id, product_name, model_no, product_category, unit_price, product_quantity):
-        self.product_id = len(self.products) + 1
+    def __init__(self, product_id, product_name, model_no, product_category, unit_price, product_quantity):
+        self.product_id = len(products) + 1
         self.product_name = product_name
         self.model_no = model_no
         self.product_category = product_category
         self.unit_price = unit_price
         self.product_quantity = product_quantity
 
+        
+    def create_a_product(self):
+        
         product={
             "product_id": self.product_id,
-            "product_name" : product_name,
-            "model_no" : model_no,
-            "product_category": product_category,
-            "unit_price": unit_price,
-            "product_quantity": product_quantity      
+            "product_name" : self.product_name,
+            "model_no" : self.model_no,
+            "product_category": self.product_category,
+            "unit_price": self.unit_price,
+            "product_quantity": self.product_quantity      
         }
 
-        self.products.append(product)
-        return jsonify(product)
+        products.append(product)
+        return jsonify({"Product successfully created":product})
 
-    def get_all_products(self):
+    @staticmethod
+    def get_all_products():
         """Model to get and 
         return all products
         """
-        if len(self.products) > 0:
-            for product in range(len(self.products)):
-                return self.products[product]
-        else:
-            return False
-
-
-    def get_a_product(self, product_id):
+        if len(products) > 0:
+            return jsonify({"Products": products})
+ 
+    @staticmethod
+    def get_a_product(product_id):
         """Model to get and return 
         a particular product
         """
-        if len(self.products) > 0:
-            for product in self.products:
-                if product.get('product_id') == product_id:
-                    return product
-                else:
-                    return False
+        for product in products:
+            if product['product_id'] == product_id:
+                return jsonify(product)
+
 
 

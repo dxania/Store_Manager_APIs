@@ -1,13 +1,13 @@
+import re
+
 from flask import jsonify, flash, request, make_response
 
 from app.exception_handler import InvalidUsage
 
 from app import app
 
-from app.models.product_models import Product
+from app.models.product_models import Product, products
 
-#instance of Products Class
-product_object = Product()
 
 
 @app.errorhandler(InvalidUsage)
@@ -36,9 +36,9 @@ def get_products():
     """Retrieve all products function 
     wrapped around the Get /products endpoint
     """
-    all_products = product_object.get_all_products()
+    all_products = Product.get_all_products()
     if all_products:
-        return jsonify({"Products":all_products, "message":"All products"})
+        return all_products, 200
     else:
         raise InvalidUsage('There are no products in the store', status_code=204) 
     
@@ -49,12 +49,12 @@ def get_product(product_id):
     function wrapped around the Get 
     /product/<int:product_id> endpoint
     """
-    a_single_product = product_object.get_a_product(product_id)
+    a_single_product = Product.get_a_product(product_id)
     if a_single_product:
-        return jsonify({"Product":a_single_product}), 200
+        return a_single_product, 200
     else:
-        raise InvalidUsage('There is no product matching that ID', status_code=404)
-
+        raise InvalidUsage('There is no product matching that ID', status_code=204)
+   
 @app.route('/api/v1/products', methods =['POST'])
 def create_product():
     """Create a product function 
@@ -66,37 +66,43 @@ def create_product():
 
     #validate user input
     pdt_name = user_input.get("product_name")
-    if not pdt_name or pdt_name.isspace() or not isinstance(pdt_name, str):
-        raise InvalidUsage('Product Name is required and should be letters', status_code=400)
+    if not pdt_name or pdt_name.isspace():
+        raise InvalidUsage('Product Name is required', status_code=400)
+    charset = re.compile('[A-Za-z]')
+    checkmatch = charset.match(pdt_name)
+    if not checkmatch:
+        raise InvalidUsage('Product Name must be letters', status_code=400)
 
     pdt_model = user_input.get("model_no")
     if not pdt_model or pdt_model.isspace():
-        raise InvalidUsage('Product Model is required', status_code=400)
+        raise InvalidUsage('Product Model number is required', status_code=400)
 
     pdt_category = user_input.get("product_category")
     if not pdt_category or pdt_category.isspace():
         raise InvalidUsage('Product Category is required', status_code=400)
     
     pdt_price = user_input.get("unit_price")
-    if not pdt_price or not isinstance(pdt_price, int) :
-        raise InvalidUsage('Product Price is required and must be an integer', status_code=400)
+    if not pdt_price:
+        raise InvalidUsage('Product Price is required', status_code=400)
+    if not isinstance(pdt_price, int) :
+        raise InvalidUsage('Product Price must be a number', status_code=400)
 
     pdt_quantity = user_input.get("product_quantity")
-    if not pdt_quantity or not isinstance(pdt_quantity, int):
-        raise InvalidUsage('Product Quantity is required and must be an integer', status_code=400)
-
+    if not pdt_quantity:
+        raise InvalidUsage('Product quantity is required', status_code=400)
+    if not isinstance(pdt_quantity, int):
+        raise InvalidUsage('Product quantity must be a number', status_code=400)
+    
     #auto generate the product ID
-    product_id = len(product_object.products) + 1
+    product_id = len(products) + 1
+    
+    for product in products:
+        if product["model_no"] == pdt_model:
+            raise InvalidUsage('Product already exists', status_code=400)
         
-    #use the Products object to invoke the create_a_product function
-    product = product_object.create_a_product(  product_id,
-                                                pdt_name,pdt_model,
-                                                pdt_category,pdt_price,
-                                                pdt_quantity)
-
-    #add the new product to the list of products
-    product_object.products.append(product)
-    if product_object.products:
+    product_object = Product(product_id, pdt_name,pdt_model,pdt_category,pdt_price,pdt_quantity)
+    product = product_object.create_a_product()
+    if products:
         return product, 201
     else:
         raise InvalidUsage('Insertion failed', status_code=400)
